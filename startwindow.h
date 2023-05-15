@@ -20,6 +20,8 @@ public:
 private slots:
     void on_start_button_clicked();
 
+    void on_loadButton_clicked();
+
 private:
     Ui::StartWindow *ui;
 };

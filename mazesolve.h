@@ -1,4 +1,3 @@
-#include <fstream>
 #include <vector>
 #include <string>
 
@@ -11,9 +10,10 @@
 
 class MazeSolve{
 public:
-    static bool saveArr(const VSS&dat, const std::string& dir);
+    static bool saveArr(const std::string& dir, const VSS&dat);
     static VSS loadArr(const std::string& dir);
     static std::string getDir();
+    static bool solve(int h, int w, VSS&arr);
 };
 
 #endif // MAZESOLVE_H

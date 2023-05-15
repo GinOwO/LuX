@@ -34,3 +34,9 @@ void Slots::toggleEnd(){
     if(end) setGreen();
     else setWhite();
 }
+
+void Slots::toggleSoln(){
+    soln = !soln;
+    if (soln) setBlue();
+    else setWhite();
+}

@@ -6,9 +6,9 @@
 
 #define setWhite() setStyleSheet("background-color: white;")
 #define setBlack() setStyleSheet("background-color: black;")
-#define setRed() setStyleSheet("background-color: red;")
 #define setGreen() setStyleSheet("background-color: green;")
-
+#define setBlue() setStyleSheet("background-color: blue;")
+#define setRed() setStyleSheet("background-color: red;")
 
 class Slots : public QPushButton{
     Q_OBJECT
@@ -18,9 +18,9 @@ public:
     void toggleSoln();
     void toggleStart();
     void toggleEnd();
-    bool getStart(){return start;}
-    bool getEnd(){return end;}
-    bool getWall(){return toggled;}
+    bool isStart(){return start;}
+    bool isEnd(){return end;}
+    bool isWall(){return toggled;}
     void reset(){
         soln = start = end = toggled = false;
         setWhite();

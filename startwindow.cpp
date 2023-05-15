@@ -33,11 +33,16 @@ void StartWindow::on_start_button_clicked(){
 }
 
 void StartWindow::on_loadButton_clicked(){
-    this->hide();
-    int h, w;
+    auto arr = MazeSolve::loadArr(MazeSolve::getDir());
+    if(arr.empty()||arr[0].empty()){
+        QMessageBox::critical(this, "Invalid input", "Please check the path of the input file");
+        return;
+    }
+    int h=arr.size(), w=arr[0].size();
     auto Window = new MainWindow;
     Window->setDimen(h,w);
-    Window->loadGrid(MazeSolve::loadArr(MazeSolve::getDir()));
+    Window->loadGrid(arr);
+    this->hide();
     Window->show();
 }
 

@@ -25,6 +25,7 @@ void StartWindow::on_start_button_clicked(){
         auto Window = new MainWindow;
         Window->setDimen(h,w);
         Window->createGrid();
+        Window->setWindowTitle("MazeSolver");
         this->hide();
         Window->show();
     }else{
@@ -47,6 +48,7 @@ void StartWindow::on_loadButton_clicked(){
     Window->setDimen(h,w);
     Window->loadGrid(arr);
     this->hide();
+    Window->setWindowTitle("MazeSolver");
     Window->show();
 }
 

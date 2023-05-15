@@ -3,16 +3,40 @@
 #include <QAction>
 
 Slots::Slots(QWidget *parent) : QPushButton(parent){
-    setStyleSheet("background-color: white;");
-    soln = start = end = toggled = false;
+    this->reset();
     connect(this, &Slots::clicked, this, &Slots::toggleBlock);
 }
 
 void Slots::toggleBlock(){
     toggled = !toggled;
-    if (toggled) {
-        setStyleSheet("background-color: red;");
-    } else {
-        setStyleSheet("background-color: white;");
-    }
+    if (toggled) setBlack();
+    else setWhite();
+}
+
+void Slots::contextMenuEvent(QContextMenuEvent *event){
+    this->reset();; QMenu menu(this);
+    QAction *startslot = new QAction("Toggle Start", this);
+    QAction *endslot = new QAction("Toggle Finish", this);
+    connect(startslot, &QAction::triggered, this, &Slots::toggleStart);
+    connect(endslot, &QAction::triggered, this, &Slots::toggleEnd);
+    menu.addAction(startslot); menu.addAction(endslot);
+    menu.exec(event->globalPos());
+}
+
+void Slots::toggleStart(){
+    start = !start;
+    if(start) setRed();
+    else setWhite();
+}
+
+void Slots::toggleEnd(){
+    end = !end;
+    if(end) setGreen();
+    else setWhite();
+}
+
+void Slots::toggleSoln(){
+    soln = !soln;
+    if (soln) setBlue();
+    else setWhite();
 }

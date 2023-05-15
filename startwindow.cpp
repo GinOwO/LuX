@@ -1,6 +1,7 @@
 #include "startwindow.h"
 #include "./ui_startwindow.h"
 #include "mainwindow.h"
+#include "mazesolve.h"
 
 #include <QMessageBox>
 #include <QDebug>
@@ -30,3 +31,13 @@ void StartWindow::on_start_button_clicked(){
         QMessageBox::critical(this, "Invalid input", "Use only positive integers for height/width.");
     }
 }
+
+void StartWindow::on_loadButton_clicked(){
+    this->hide();
+    int h, w;
+    auto Window = new MainWindow;
+    Window->setDimen(h,w);
+    Window->loadGrid(MazeSolve::loadArr(MazeSolve::getDir()));
+    Window->show();
+}
+

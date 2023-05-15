@@ -22,6 +22,8 @@ set(PROJECT_SOURCES
         mainwindow.ui
         slots.h
         slots.cpp
+        mazesolve.h
+        mazesolve.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

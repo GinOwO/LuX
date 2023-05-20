@@ -1,20 +1,13 @@
-___
 # MazeSolver
-![GitHub csize](https://img.shields.io/github/languages/code-size/KThankYou/MazeSolver) [![LICENSE](https://img.shields.io/github/license/KThankYou/MazeSolver?color=blue)](LICENSE) ![Language](https://img.shields.io/badge/Language-C%2B%2B-brightgreen) ![Qt](https://img.shields.io/badge/Qt-6.5.0-brightgreen)
-
----
+[![LICENSE](https://img.shields.io/github/license/KThankYou/MazeSolver?color=blue)](LICENSE) ![Language](https://img.shields.io/badge/Language-C%2B%2B-brightgreen) ![Qt](https://img.shields.io/badge/Qt-6.5.0-brightgreen) ![GitHub csize](https://img.shields.io/github/languages/code-size/KThankYou/MazeSolver)
 
 ## Description
 
 MazeSolver is a GUI application built with the Qt framework. It allows users to create and solve grids or mazes of their desired dimensions. The application provides an intuitive interface for creating, modifying, and solving mazes. It will find the shortest path to one of the the finish points from the start point.
 
----
-
 ## Installation
 
 Download Release.7z from releases and extract the contents to a folder. Then run MazeSolver.exe.
-
----
 
 ## Building From Source
 
@@ -42,8 +35,6 @@ cd MazeSolver
 5. Use the `set PATH=<path_to_qt>;%PATH%` to use the Qt DLLs, ex:`set PATH=D:\Qt\Tools\mingw1120_64\bin;%PATH%`
 6. Now run the `windeployqt6 "<path_to_exe>"` command to copy necessary DLLs to the exe folder, ex: `windeployqt6 "D:\MazeSolver\MazeSolver.exe"`
 
----
-
 ## Usage
 
 1. Launch MazeSolver.exe
@@ -62,10 +53,6 @@ cd MazeSolver
 - - The first line is height and width separated by a white space
 - - "W" represents walls, "S" represent the start point, "E" represents finish/end point, "." represents empty paths.
 
----
-
 ## License
 
 This project is licensed under [The Unlicense](LICENSE).
-
-___

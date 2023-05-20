@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QSize>
+
 #include <stdexcept>
 #include <vector>
 #include <string>

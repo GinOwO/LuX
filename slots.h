@@ -21,6 +21,7 @@ public:
     bool isStart(){return start;}
     bool isEnd(){return end;}
     bool isWall(){return toggled;}
+    bool isSoln(){return soln;}
     void reset(){
         soln = start = end = toggled = false;
         setWhite();

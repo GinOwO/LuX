@@ -23,8 +23,8 @@ To build LuX, you require the following on your system:
 
 Open a command line in your desired folder, clone the repo and change the directory to the cloned folder using
 ```
-git clone https://github.com/KThankYou/MazeSolver.git
-cd MazeSolver
+git clone https://github.com/KThankYou/LuX.git
+cd LuX
 ```
 
 ### Building

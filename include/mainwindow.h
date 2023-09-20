@@ -1,11 +1,10 @@
-#include <QMainWindow>
-#include <QGridLayout>
-
-#define VS std::vector<std::string>
-#define VSS std::vector<VS>
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+
+#include "mazesolve.h"
+
+#include <QMainWindow>
+#include <QGridLayout>
 
 namespace Ui {
 class MainWindow;
@@ -27,17 +26,23 @@ private slots:
 
     void on_actionReset_triggered();
 
-    void on_actionStart_triggered();
-
     void on_actionReload_triggered();
+
+    void on_actionDFS_triggered();
+
+    void on_actionBFS_triggered();
+
+    void on_actionFlood_Fill_triggered();
 
 private:
     Ui::MainWindow *ui;
     int height, width;
     QGridLayout *gridLayout;
+
     VSS getArray();
     bool reload;
     VSS reload_arr;
+    void solveMaze(int);
 };
 
 #endif // MAINWINDOW_H

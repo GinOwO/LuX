@@ -27,12 +27,20 @@
     <property name="title">
      <string>Menu</string>
     </property>
-    <addaction name="actionStart"/>
     <addaction name="actionSave"/>
     <addaction name="actionReload"/>
     <addaction name="actionReset"/>
    </widget>
+   <widget class="QMenu" name="menuMethod">
+    <property name="title">
+     <string>Solve</string>
+    </property>
+    <addaction name="actionDFS"/>
+    <addaction name="actionBFS"/>
+    <addaction name="actionFlood_Fill"/>
+   </widget>
    <addaction name="menutest"/>
+   <addaction name="menuMethod"/>
   </widget>
   <action name="actionStart">
    <property name="text">
@@ -52,6 +60,21 @@
   <action name="actionReload">
    <property name="text">
     <string>Reload</string>
+   </property>
+  </action>
+  <action name="actionDFS">
+   <property name="text">
+    <string>DFS</string>
+   </property>
+  </action>
+  <action name="actionBFS">
+   <property name="text">
+    <string>BFS</string>
+   </property>
+  </action>
+  <action name="actionFlood_Fill">
+   <property name="text">
+    <string>Flood Fill</string>
    </property>
   </action>
  </widget>

@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     centralWidget->setLayout(gridLayout);
     setCentralWidget(centralWidget);
     for (int i = 0; i < height; i++) for (int j = 0; j < width; j++) gridLayout->itemAtPosition(i, j)->widget();
+
 }
 
 MainWindow::~MainWindow(){
@@ -72,18 +73,16 @@ VSS MainWindow::getArray(){
         VS i_arr;
         for (int j = 0; j < width; j++) {
             auto item = gridLayout->itemAtPosition(i, j);
-            if (item){
-                auto slot = qobject_cast<Slots*>(item->widget());
-                if (slot){
-                    if (slot->isStart()){
-                        if(start) throw std::invalid_argument("There can only be one start");
-                        start=true; i_arr.push_back("S");
-                    }
-                    else if(slot->isEnd())i_arr.push_back("E"), end=true;
-                    else if(slot->isWall()) i_arr.push_back("W");
-                    else i_arr.push_back(".");
-                }
+            if (!item) continue;
+            auto slot = qobject_cast<Slots*>(item->widget());
+            if (!slot) continue;
+            if (slot->isStart()){
+                if(start) throw std::invalid_argument("There can only be one start");
+                start=true; i_arr.push_back("S");
             }
+            else if(slot->isEnd())i_arr.push_back("E"), end=true;
+            else if(slot->isWall()) i_arr.push_back("W");
+            else i_arr.push_back(".");
         }
         arr.push_back(i_arr);
     }
@@ -93,13 +92,12 @@ VSS MainWindow::getArray(){
 
 void MainWindow::on_actionReset_triggered(){
     for (int i = 0; i < height; i++)
-        for (int j = 0; j < width; j++) {
-            auto item = gridLayout->itemAtPosition(i, j);
-            if (item){
-                auto slot = qobject_cast<Slots*>(item->widget());
-                if (slot) slot->reset();
-            }
-        }
+    for (int j = 0; j < width; j++){
+        auto item = gridLayout->itemAtPosition(i, j);
+        if (!item) continue;
+        auto slot = qobject_cast<Slots*>(item->widget());
+        if (slot) slot->reset();
+    }
 }
 
 void MainWindow::on_actionSave_triggered(){
@@ -115,9 +113,9 @@ void MainWindow::on_actionSave_triggered(){
         QMessageBox::critical(this,"Error","Some Error occurred, try again with a different location");
 }
 
-void MainWindow::on_actionStart_triggered(){
+void MainWindow::solveMaze(int id){
     auto arr = this->getArray();
-    bool pass = MazeSolve::solve(height, width, arr);
+    bool pass = MazeSolve::solve(height, width, arr, id);
     if (!pass){
         QMessageBox::critical(this, "Path Not Found", "No solution for this maze exists");
         return;
@@ -125,16 +123,12 @@ void MainWindow::on_actionStart_triggered(){
     for (int i = 0; i < height; i++)
         for (int j = 0; j < width; j++) {
             auto item = gridLayout->itemAtPosition(i, j);
-            if (item){
-                auto slot = qobject_cast<Slots*>(item->widget());
-                if (slot){
-                    if (slot->isStart()||slot->isEnd()||slot->isWall()) continue;
-                    slot->reset();
-                    if (arr[i][j]=="T") slot->toggleSoln();
-                }
-            }
+            if(!item) continue;
+            auto slot = qobject_cast<Slots*>(item->widget());
+            if (!slot || slot->isStart() || slot->isEnd() || slot->isWall()) continue;
+            slot->reset();
+            if (arr[i][j]=="T") slot->toggleSoln();
         }
-
 }
 
 
@@ -143,19 +137,29 @@ void MainWindow::on_actionReload_triggered(){
         QMessageBox::critical(this, "Error", "Can only be used if maze is loaded from file");
         return;
     }
-    for (int i = 0; i < height; i++)
-        for (int j = 0; j < width; j++) {
+    for (int i = 0; i < height; i++){
+        for (int j = 0; j < width; j++){
             auto item = gridLayout->itemAtPosition(i, j);
-            if (item){
-                auto slot = qobject_cast<Slots*>(item->widget());
-                if (slot){
-                    slot->reset();
-                    if(this->reload_arr[i][j]=="W") slot->toggleBlock();
-                    else if(this->reload_arr[i][j]=="S") slot->toggleStart();
-                    else if(this->reload_arr[i][j]=="E") slot->toggleEnd();
-                }
-            }
+            if (!item) continue;
+            auto slot = qobject_cast<Slots*>(item->widget());
+            if (!slot) continue;
+            slot->reset();
+            if(this->reload_arr[i][j]=="W") slot->toggleBlock();
+            else if(this->reload_arr[i][j]=="S") slot->toggleStart();
+            else if(this->reload_arr[i][j]=="E") slot->toggleEnd();
         }
+    }
+}
 
+void MainWindow::on_actionDFS_triggered(){
+    this->solveMaze(0);
+}
+
+void MainWindow::on_actionBFS_triggered(){
+    this->solveMaze(1);
+}
+
+void MainWindow::on_actionFlood_Fill_triggered(){
+    this->solveMaze(2);
 }
 

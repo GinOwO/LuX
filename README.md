@@ -17,17 +17,19 @@ To build LuX, you require the following on your system:
 
 - C++20 or above
 - Qt framework 6.5.0+
-- Qt Creator Community 10.0.0+ 
+- Qt Creator Community 10.0.0+
+- (Optional: Linux Building only) [CQtDeployer](https://github.com/QuasarApp/CQtDeployer)
 
 ### Cloning 
 
-Open a command line in your desired folder, clone the repo and change the directory to the cloned folder using
+Open a command line in your desired folder, clone the repo with the following command
 ```
 git clone https://github.com/KThankYou/LuX.git
-cd LuX
 ```
 
-### Building
+## Building
+
+### Windows
 1. Open Qt Creator and load the project.
 2. Switch to release and then build the project.
 3. Copy the release exe from the build folder to your desired folder.
@@ -35,13 +37,19 @@ cd LuX
 5. Use the `set PATH=<path_to_qt>;%PATH%` to use the Qt DLLs, ex:`set PATH=D:\Qt\Tools\mingw1120_64\bin;%PATH%`
 6. Now run the `windeployqt6 "<path_to_exe>"` command to copy necessary DLLs to the exe folder, ex: `windeployqt6 "D:\Lux\Lux.exe"`
 
+### Linux
+1. Open Qt Creator and load the project.
+2. Switch to release and then build the project.
+3. Copy the release build from the build folder to your desired folder.
+4. Open a terminal in the folder and copy the necessary files with CQtDeployer using `cqtdeployer -bin Lux -qmake /path/to/Qt/6.5.*/gcc_64/bin/qmake`
+
 ## Usage
 
-1. Launch Lux.exe
+1. Launch Lux
 2. Choose LOAD to load a saved maze or enter a height and width and press START
-3. Left click on the grids to toggle walls
-4. Right click to open the context menu to get options to toggle starting position and ending position. There can only be a single start but multiple finish points can exist. It will find the nearest finish point.
-5. Go to Menu and click Start to solve the maze.
+3. Left click on the grids to toggle walls.
+4. Right click to open the context menu to get options to toggle starting position and ending position. There can only be a single start but multiple finish points can exist.
+5. Go to solve and select the algorithm to solve it.
 
 #### Note:
 - Menu->Save to save the current maze layout in a file. A layout can be created manually using a text editor.

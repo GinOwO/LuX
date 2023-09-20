@@ -92,12 +92,12 @@ VSS MainWindow::getArray(){
 
 void MainWindow::on_actionReset_triggered(){
     for (int i = 0; i < height; i++)
-    for (int j = 0; j < width; j++){
-        auto item = gridLayout->itemAtPosition(i, j);
-        if (!item) continue;
-        auto slot = qobject_cast<Slots*>(item->widget());
-        if (slot) slot->reset();
-    }
+        for (int j = 0; j < width; j++){
+            auto item = gridLayout->itemAtPosition(i, j);
+            if (!item) continue;
+            auto slot = qobject_cast<Slots*>(item->widget());
+            if (slot) slot->reset();
+        }
 }
 
 void MainWindow::on_actionSave_triggered(){
@@ -114,7 +114,12 @@ void MainWindow::on_actionSave_triggered(){
 }
 
 void MainWindow::solveMaze(int id){
-    auto arr = this->getArray();
+    VSS arr;
+    try {arr = getArray();}
+    catch(const std::invalid_argument& e){
+        QMessageBox::critical(this, "Error", e.what());
+        return;
+    }
     bool pass = MazeSolve::solve(height, width, arr, id);
     if (!pass){
         QMessageBox::critical(this, "Path Not Found", "No solution for this maze exists");
@@ -162,4 +167,3 @@ void MainWindow::on_actionBFS_triggered(){
 void MainWindow::on_actionFlood_Fill_triggered(){
     this->solveMaze(2);
 }
-

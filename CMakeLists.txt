@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Lux VERSION 1.0 LANGUAGES CXX)
+project(Lux VERSION 1.5 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -43,6 +43,10 @@ install(TARGETS Lux
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+if(WIN32)
+    set_property(TARGET Lux PROPERTY WIN32_EXECUTABLE true)
+endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Lux)

@@ -131,7 +131,7 @@ bool dfs(PI start, SII&end, VSS&arr, const int&h, const int&w){
     arr[i][j] = "P";
 
     if( dfs({i,j+1},end,arr,h,w) || dfs({i,j-1},end,arr,h,w)||
-            dfs({i+1,j},end,arr,h,w) || dfs({i-1,j},end,arr,h,w)){
+        dfs({i+1,j},end,arr,h,w) || dfs({i-1,j},end,arr,h,w)){
         arr[i][j] = "T";
         return true;
     }

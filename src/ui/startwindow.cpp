@@ -34,7 +34,13 @@ void StartWindow::on_start_button_clicked(){
 }
 
 void StartWindow::on_loadButton_clicked(){
-    auto arr = MazeSolve::loadArr(MazeSolve::getDir());
+    VSS arr;
+    try{arr = MazeSolve::loadArr(MazeSolve::getDir());}
+    catch(const std::invalid_argument& e){
+        QMessageBox::critical(this, "Error", e.what());
+        return;
+    }
+
     if(arr.empty()||arr[0].empty()){
         QMessageBox::critical(this, "Invalid input", "Please check the path of the input file");
         return;
@@ -48,7 +54,6 @@ void StartWindow::on_loadButton_clicked(){
     Window->setDimen(h,w);
     Window->loadGrid(arr);
     this->hide();
-    Window->setWindowTitle("MazeSolver");
+    Window->setWindowTitle("LuX");
     Window->show();
 }
-

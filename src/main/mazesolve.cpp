@@ -5,8 +5,9 @@
 #include <QMessageBox>
 #include <QString>
 #include <QDir>
+#include <QFile>
+#include <QTextStream>
 
-#include <fstream>
 #include <utility>
 #include <vector>
 #include <string>
@@ -18,45 +19,54 @@ bool bfs(PI start, SII&end, VSS&arr, const int&h, const int&w);
 bool dfs(PI start, SII&end, VSS&arr, const int&h, const int&w);
 bool floodFill(PI start, SII&end, VSS&arr, const int&h, const int&w);
 
-bool MazeSolve::saveArr(const std::string&dir, const VSS&dat){
-    std::ofstream handle(dir);
-    if(handle.fail()){
-        handle.close();
+bool MazeSolve::saveArr(const QString& dir, const VSS& dat) {
+    QFile file(dir);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
         return false;
     }
-    handle << dat.size() << ' ' << dat[0].size() <<'\n';
-    for(auto&i:dat){
-        for(auto&c:i) handle << c << ' ';
-        handle << '\n';
+    QTextStream stream(&file);
+    stream << dat.size() << ' ' << dat[0].size() << '\n';
+    for (const auto& row : dat) {
+        for (const std::string& cell : row) {
+            QString cellStr = QString::fromStdString(cell);
+            stream << cellStr << ' ';
+        }
+        stream << '\n';
     }
-    handle.close();
+    file.close();
     return true;
 }
 
-VSS MazeSolve::loadArr(const std::string&dir){
-    std::ifstream handle(dir);
-    if(handle.fail()){
-        handle.close();
+VSS MazeSolve::loadArr(const QString& dir) {
+    QFile file(dir);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         return {};
     }
-    int h,w; handle >> h >> w;
+
+    QTextStream stream(&file);
+    QString value;
+    int h, w;
+    stream >> h >> w;
     VSS arr(h);
-    for(int i=0;i<h;i++){
-        arr[i] = VS(w);
-        for(int j=0;j<w;j++){
-            handle >> arr[i][j];
+    for(auto&x:arr) {
+        x = VS(w);
+        for(auto&c:x) {
+            stream >> value;
+            c = value.toStdString();
         }
     }
+
+    file.close();
     return arr;
 }
 
-std::string MazeSolve::getDir(){
+QString MazeSolve::getDir(){
     QString location = QFileDialog::getOpenFileName(nullptr,"Load Maze",QDir::currentPath(), "Text files(*.txt) || All Files(*)");
     if (location.isEmpty()) {
         QMessageBox::critical(nullptr, "Error", "No Path Entered");
         return "";
     }
-    return location.toStdString();
+    return location;
 }
 
 bool MazeSolve::solve(int h, int w, VSS&arr, int id) {

@@ -1,4 +1,4 @@
-name: Build Linux
+name: Build Windows
 
 on:
   push:
@@ -8,25 +8,30 @@ on:
 env:
   QT_VERSION: "6.5.0"
   BUILD_TYPE: Release
-  COMPILER: gcc_64
+  COMPILER: msvc
   BUILD_GEN: "Ninja"
-  COMPILER_PATH: ${{github.workspace}}/qt/Qt/6.5.0/gcc_64
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Set up MSVC
+      uses: ilammy/msvc-dev-cmd@v1.12.1
+
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
         version: ${{ env.QT_VERSION }}
-    
+        host: "windows"
+        target: "desktop"
+        arch: "win64_msvc2019_64"
+
     - name: Install Ninja
-      run: sudo apt-get install ninja-build
+      uses: seanmiddleditch/gha-setup-ninja@master
 
     - name: Build
       run: cmake -S . -B build -G "${{ env.BUILD_GEN }}" && cmake --build build --config ${{ env.BUILD_TYPE }}

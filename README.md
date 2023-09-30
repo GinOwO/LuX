@@ -5,9 +5,17 @@
 
 LuX is a GUI application built with the Qt framework. It allows users to create and solve grids or mazes of their desired dimensions. The application provides an intuitive interface for creating, modifying, and solving mazes. It will find the shortest path to one of the the finish points from the start point.
 
-## Installation
+## Downloading
 
-Download Release.7z from releases and extract the contents to a folder. Then run Lux.exe.
+To use the pre-built binaries follow the steps below
+
+### Linux
+
+Download `LuX_Linux_x86_64.tar.gz` from releases and extract the contents to a folder. Then run `/DistributionKit/Lux.sh`
+
+### Windows
+
+Download `LuX_Windows_x86_64.zip` from releases and extract the contents to a folder. Then run `Lux.exe`
 
 ## Building From Source
 
@@ -33,7 +41,7 @@ git clone https://github.com/KThankYou/LuX.git
 1. Open Qt Creator and load the project.
 2. Switch to release and then build the project.
 3. Copy the release exe from the build folder to your desired folder.
-4. Open a command line in your bin folder in the Qt installation, ex: `"D:\Qt\6.5.0\mingw_64\bin"`
+4. Open a command line in your bin folder in the Qt installation, ex: `"D:\Qt\6.5.*\mingw_64\bin"`
 5. Use the `set PATH=<path_to_qt>;%PATH%` to use the Qt DLLs, ex:`set PATH=D:\Qt\Tools\mingw1120_64\bin;%PATH%`
 6. Now run the `windeployqt6 "<path_to_exe>"` command to copy necessary DLLs to the exe folder, ex: `windeployqt6 "D:\Lux\Lux.exe"`
 

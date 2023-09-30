@@ -1,5 +1,5 @@
 #include "startwindow.h"
-#include "./ui_startwindow.h"
+#include "ui_startwindow.h"
 #include "mainwindow.h"
 #include "mazesolve.h"
 

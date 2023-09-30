@@ -29,6 +29,7 @@ jobs:
         host: "windows"
         target: "desktop"
         arch: "win64_msvc2019_64"
+        cache: 'true'
 
     - name: Install Ninja
       uses: seanmiddleditch/gha-setup-ninja@master

@@ -32,7 +32,7 @@ To build LuX, you require the following on your system:
 
 Open a command line in your desired folder, clone the repo with the following command
 ```
-git clone https://github.com/KThankYou/LuX.git
+git clone https://github.com/GinOwO/LuX.git
 ```
 
 ## Building

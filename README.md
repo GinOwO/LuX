@@ -11,7 +11,7 @@ To use the pre-built binaries follow the steps below
 
 ### Linux
 
-Download `LuX_Linux_x86_64.tar.gz` from releases and extract the contents to a folder. Then run `/DistributionKit/Lux.sh`
+Download `LuX_Linux_x86_64.tar.gz` from releases and extract the contents to a folder. Then run `LuX-*.AppImage`
 
 ### Windows
 
@@ -26,7 +26,7 @@ To build LuX, you require the following on your system:
 - C++20 or above
 - Qt framework 6.5.0+
 - Qt Creator Community 10.0.0+
-- (Optional: Linux Building only) [CQtDeployer](https://github.com/QuasarApp/CQtDeployer)
+- (Optional: Linux only) [AppImage-Builder](https://appimage-builder.readthedocs.io/en/latest/intro/install.html)
 
 ### Cloning 
 
@@ -48,8 +48,8 @@ git clone https://github.com/GinOwO/LuX.git
 ### Linux
 1. Open Qt Creator and load the project.
 2. Switch to release and then build the project.
-3. Copy the release build from the build folder to your desired folder.
-4. Open a terminal in the folder and copy the necessary files with CQtDeployer using `cqtdeployer -bin Lux -qmake /path/to/Qt/6.5.*/gcc_64/bin/qmake`
+3. Copy the release build from the build folder to your desired folder. Make the directory `AppDir/usr/bin` and copy the release build to it.
+4. Open a terminal in the folder and run `appimage-builder --generate && appimage-builder` to generate the AppImage.
 
 ## Usage
 
